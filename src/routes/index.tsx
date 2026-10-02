@@ -274,27 +274,26 @@ function Index() {
         <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
           I build fast, clean web apps, from pixel-perfect interfaces to the APIs behind them.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          {["React", "Next.js", "Node.js", "Tailwind"].map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-border bg-surface/70 px-3 py-1 font-mono text-xs text-foreground/80 backdrop-blur dark:bg-neutral-900/70"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+        <div className="flex w-full flex-nowrap items-center justify-center gap-1.5 min-[360px]:gap-2">
+  {["React", "Next.js", "Node.js", "Tailwind"].map((tech) => (
+    <span
+      key={tech}
+      className="whitespace-nowrap rounded-full border border-border bg-surface/70 px-2.5 py-1 font-mono text-[11px] text-foreground/80 backdrop-blur min-[360px]:px-3 min-[360px]:text-xs dark:bg-neutral-900/70"
+    >
+      {tech}
+    </span>
+  ))}
+</div>
       </div>
 
-      {/* 5. MOBILE/TABLET PORTRAIT: pinned to the bottom, with floating status chips */}
-      <div className="relative mt-auto flex w-full justify-center pt-12 leading-none lg:hidden">
-        {/* soft arch behind the portrait */}
-        <div className="absolute bottom-0 left-1/2 h-[90%] w-72 -translate-x-1/2 rounded-t-full bg-gradient-t from-foreground/10 to-transparent min-[400px]:w-95 sm:w-96" />
-
+      {/* 5. MOBILE/TABLET PORTRAIT: takes ALL remaining height, image anchored to the bottom */}
+      <div className="relative mt-6 min-h-[17rem] w-full flex-1 lg:hidden">
+        
+        
         <img
           src="/image.png"
           alt="Jagjit Singh"
-          className="relative z-0 -mb-px block h-auto w-72 object-contain object-bottom align-bottom brightness-110 min-[400px]:w-110 sm:w-96"
+          className="absolute inset-x-0 bottom-0 z-0 mx-auto block h-full w-full filter brightness-110"
         />
       </div>
     </div>
@@ -350,6 +349,7 @@ function Index() {
 
   </div>
 </section>
+
 
 
         <section id="about" className="border-t border-border py-20 lg:py-28">
