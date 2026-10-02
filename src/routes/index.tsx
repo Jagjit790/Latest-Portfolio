@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useEffect } from "react";
-
+import { Sun, Moon, Smartphone } from "lucide-react";
 import { ArrowDownRight, ArrowUpRight, BookOpen, Braces, Code2, Download, Github, Linkedin, Mail, Menu, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,7 @@ import foodieGoImage from "@/assets/foodiego.jpg";
 import studyBuddyImage from "@/assets/study-buddy.png";
 import ipcImage from "@/assets/ipc-framework.png";
 import restaurantImage from "@/assets/restaurant-site.png";
+import SmokeCursor from "@/components/ui/SpotlightEffect";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -93,35 +94,71 @@ function Index() {
     }
   }, []);
 
+  const [isDark, setIsDark] = useState(false);
+
+// Check if dark mode is already active when the page loads
+useEffect(() => {
+  if (document.documentElement.classList.contains("dark")) {
+    setIsDark(true);
+  }
+}, []);
+
+const toggleTheme = () => {
+  if (isDark) {
+    document.documentElement.classList.remove("dark");
+    setIsDark(false);
+  } else {
+    document.documentElement.classList.add("dark");
+    setIsDark(true);
+  }
+};
+
+
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
+      <SmokeCursor/>
       <header className="sticky top-0 z-40 px-4 pt-3 sm:px-6">
         <>
   {/* TOP NAVIGATION BAR */}
-  <nav aria-label="Main navigation" className="mx-auto max-w-6xl rounded-full border border-border bg-surface/75 px-4 py-2 shadow-[var(--shadow-soft)] backdrop-blur-xl relative z-30">
-    <div className="flex items-center justify-between">
-      <a href="#top" className="font-display text-xl font-semibold">JSK<span className="text-primary">.</span></a>
-      
-      {/* Desktop Links */}
-      <div className="hidden items-center gap-1 text-sm text-muted-foreground md:flex">
-        {[["About", "about"], ["Projects", "projects"], ["Skills", "skills"], ["Journey", "journey"]].map(([label, id]) => (
-          <a key={id} href={`#${id}`} className="rounded-full px-3 py-2 transition-colors hover:bg-secondary/70 hover:text-foreground">
-            {label}
-          </a>
-        ))}
-      </div>
-      
-      <div className="flex items-center gap-2">
-        <Button asChild variant="portfolioDark" size="sm">
-          <a href="#contact">Let's connect</a>
-        </Button>
-        {/* Mobile Hamburger Button */}
-        <Button variant="ghost" size="icon" className="rounded-full md:hidden" aria-label="Open navigation" onClick={() => setMenuOpen(true)}>
-          <Menu />
-        </Button>
-      </div>
+ <nav aria-label="Main navigation" className="mx-auto max-w-6xl rounded-full border border-border bg-surface/75 px-4 py-2 shadow-[var(--shadow-soft)] backdrop-blur-xl relative z-30">
+  <div className="flex items-center justify-between">
+    <a href="#top" className="font-display text-xl font-semibold">JSK<span className="text-primary">.</span></a>
+    
+    {/* Desktop Links */}
+    <div className="hidden items-center gap-1 text-sm text-muted-foreground md:flex">
+      {[["About", "about"], ["Projects", "projects"], ["Skills", "skills"], ["Journey", "journey"]].map(([label, id]) => (
+        <a key={id} href={`#${id}`} className="rounded-full px-3 py-2 transition-colors hover:bg-secondary/70 hover:text-foreground">
+          {label}
+        </a>
+      ))}
     </div>
-  </nav>
+    
+    <div className="flex items-center gap-2">
+      {/* Dark/Light Mode Toggle */}
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        className="rounded-full" 
+        aria-label="Toggle theme" 
+        onClick={toggleTheme}
+      >
+        <Sun className="h-5 w-5 transition-all dark:hidden" />
+        <Moon className="hidden h-5 w-5 transition-all dark:block" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+
+      <Button asChild variant="portfolioDark" size="sm">
+        <a href="#contact">Let's connect</a>
+      </Button>
+      
+      {/* Mobile Hamburger Button */}
+      <Button variant="ghost" size="icon" className="rounded-full md:hidden" aria-label="Open navigation" onClick={() => setMenuOpen(true)}>
+        <Menu />
+      </Button>
+    </div>
+  </div>
+</nav>
 
   {/* MOBILE SLIDE-IN MENU */}
   {/* 1. Dark Overlay Backdrop */}
@@ -219,7 +256,7 @@ function Index() {
           className="pointer-events-none absolute left-1/2 top-1/2 z-10 hidden w-[180px] -translate-x-1/2 -translate-y-[40%] lg:block xl:w-[240px] 2xl:w-[300px]"
         >
           <img
-            src="/profile.png"
+            src="/image.png"
             alt="Jagjit Singh"
             className="h-auto w-full object-contain brightness-110"
           />
@@ -293,7 +330,7 @@ function Index() {
         <img
           src="/image.png"
           alt="Jagjit Singh"
-          className="absolute inset-x-0 bottom-0 z-0 mx-auto block h-full w-full filter brightness-110"
+          className="absolute inset-x-0 bottom-0 z-0 mx-auto block h-full w-full brightness-110 drop-shadow-[0_0_2px_rgba(0,0,0,1)] dark:drop-shadow-[0_0_2px_rgba(255,255,255,1)]"
         />
       </div>
     </div>
