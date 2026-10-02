@@ -292,7 +292,7 @@ function Index() {
         <div className="absolute bottom-0 left-1/2 h-[90%] w-72 -translate-x-1/2 rounded-t-full bg-gradient-t from-foreground/10 to-transparent min-[400px]:w-95 sm:w-96" />
 
         <img
-          src="/profile.png"
+          src="/image.png"
           alt="Jagjit Singh"
           className="relative z-0 -mb-px block h-auto w-72 object-contain object-bottom align-bottom brightness-110 min-[400px]:w-110 sm:w-96"
         />
